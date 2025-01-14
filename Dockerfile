@@ -1,16 +1,13 @@
 FROM node:23-slim
 
 # コンテナ内の作業ディレクトリを設定
-WORKDIR /app
+WORKDIR /todoapp-client
 
 # ホストのpackage.jsonとpackage-lock.jsonをコンテナの作業ディレクトリにコピー
-COPY package.json package-lock.json ./
+COPY package*.json ./
 
 # npm installを実行
 RUN npm install
-
-# ソースコードのコピー
-COPY . .
 
 EXPOSE 3000
 
