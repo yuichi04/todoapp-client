@@ -1,5 +1,3 @@
-export const API_URL = import.meta.env.VITE_API_URL
-
 export const ERROR_TYPES = {
   INVALID_CSRF_TOKEN: 'invalid csrf token',
   INVALID_JWT: 'invalid or expired jwt',

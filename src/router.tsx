@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Auth } from './auth'
 import { TodoItem } from './components/molecules'
 import { useEffect } from 'react'
-import { axiosConfig } from './lib/config/axios'
+import { axiosConfig } from './config/axios'
 import { getCsrfToken } from './lib/api/client'
 
 const Router = () => {
