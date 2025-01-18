@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { removeWhitespace } from '../format'
 
-const passwordSchema = z
+const schema = z
   .string()
   .min(1, 'パスワードを入力してください')
   .regex(/[A-Z]/, 'パスワードには大文字を含める必要があります')
@@ -11,6 +11,6 @@ const passwordSchema = z
   .refine((val) => val.length >= 8, 'パスワードは8文字以上で入力してください')
 
 export const validatePassword = (password: string): string => {
-  const result = passwordSchema.safeParse(password)
+  const result = schema.safeParse(password)
   return result.success ? '' : result.error.errors[0].message
 }
