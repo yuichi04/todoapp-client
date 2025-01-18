@@ -7,7 +7,7 @@ export type Credential = {
   password: string
 }
 
-export type Task = {
+export type TodoResponse = {
   id: number
   title: string
   created_at: Date

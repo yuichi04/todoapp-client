@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Auth } from './auth'
+import { LogIn } from './components/organisms'
 import { TodoItem } from './components/molecules'
 import { useEffect } from 'react'
 import { axiosConfig } from './config/axios'
-import { getCsrfToken } from './lib/api/client'
+import { getCsrfToken } from './lib/api/csrf'
 
 const Router = () => {
   useEffect(() => {
@@ -14,7 +14,7 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Auth />} />
+        <Route path="/login" element={<LogIn />} />
         <Route path="/todo" element={<TodoItem />} />
       </Routes>
     </BrowserRouter>

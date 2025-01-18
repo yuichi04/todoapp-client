@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import useStore from '../../store'
 import { ERROR_MESSAGES, ERROR_TYPES } from '../../constants/errors'
-import { getCsrfToken } from '../api/client'
+import { getCsrfToken } from '../api/csrf'
 
 export const useError = () => {
   const navigate = useNavigate()
