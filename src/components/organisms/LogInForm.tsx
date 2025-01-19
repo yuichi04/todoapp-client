@@ -4,6 +4,9 @@ import { SocialButton, Divider } from '../molecules'
 
 export const LogInForm = () => {
   const { email, errors, password, handleChange, handleSubmit } = useLogIn()
+  const isEmailError = errors.email.isError
+  const isPasswordError = errors.password.isError
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="space-y-2">
@@ -13,11 +16,9 @@ export const LogInForm = () => {
           type="email"
           value={email}
           onChange={(e) => handleChange(e, 'email')}
-          isError={errors.email.isError}
+          isError={isEmailError}
         />
-        {errors.email.isError && (
-          <ValidationMessage message={errors.email.message} />
-        )}
+        {isEmailError && <ValidationMessage message={errors.email.message} />}
       </div>
       <div className="space-y-2">
         <Label htmlFor="password">パスワード:</Label>
@@ -26,13 +27,13 @@ export const LogInForm = () => {
           type="password"
           value={password}
           onChange={(e) => handleChange(e, 'password')}
-          isError={errors.password.isError}
+          isError={isPasswordError}
         />
-        {errors.password.isError && (
+        {isPasswordError && (
           <ValidationMessage message={errors.password.message} />
         )}
       </div>
-      <div>
+      <div className="pt-2">
         <Button type="submit" fullWidth>
           ログインする
         </Button>
