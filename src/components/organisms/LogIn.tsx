@@ -1,8 +1,9 @@
-import { useLogin } from '../../lib/hooks/useLogin'
+import { Link } from 'react-router-dom'
+import { useLogIn } from '../../lib/hooks/useLogIn'
 import { TextField, ValidationMessage } from '../atoms'
 
 export const LogIn = () => {
-  const { email, errors, password, handleChange, handleSubmit } = useLogin()
+  const { email, errors, password, handleChange, handleSubmit } = useLogIn()
   return (
     <form onSubmit={handleSubmit}>
       <h2>ログイン画面</h2>
@@ -32,7 +33,10 @@ export const LogIn = () => {
           <ValidationMessage message={errors.password.message} />
         )}
       </div>
-      <button type="submit">ログイン</button>
+      <div>
+        <button type="submit">ログイン</button>
+      </div>
+      <Link to="/signup">既にアカウントをお持ちの方はこちら</Link>
     </form>
   )
 }

@@ -1,7 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { useMutateAuth } from './useMutateAuth'
 import { validateEmail, validatePassword } from '../utils/validations'
-import { removeWhitespace } from '../utils/format'
 
 type ValidationError = {
   isError: boolean
@@ -11,6 +10,7 @@ type ValidationError = {
 type FormErrors = {
   email: ValidationError
   password: ValidationError
+  confirmPassword: ValidationError
 }
 
 type FormField = keyof FormErrors
@@ -24,17 +24,23 @@ const initialErrors: FormErrors = {
     isError: false,
     message: '',
   },
+  confirmPassword: {
+    isError: false,
+    message: '',
+  },
 }
 
-export const useLogin = () => {
-  const { loginMutation } = useMutateAuth()
+export const useSignUp = () => {
+  const { registerMutation } = useMutateAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
   const [errors, setErrors] = useState<FormErrors>(initialErrors)
 
   const validateForm = (): boolean => {
-    const emailError = validateEmail(email)
-    const passwordError = validatePassword(password)
+    const emailError = validateEmail(email, 'signup')
+    const passwordError = validatePassword(password, 'signup')
+    const confirmPasswordError = confirmPassword !== password
 
     const newErrors: FormErrors = {
       ...initialErrors,
@@ -44,26 +50,38 @@ export const useLogin = () => {
       password: passwordError
         ? { isError: true, message: passwordError }
         : initialErrors.password,
+      confirmPassword: confirmPasswordError
+        ? { isError: true, message: 'パスワードが一致しません' }
+        : initialErrors.confirmPassword,
     }
 
     setErrors(newErrors)
-    return !emailError && !passwordError
+    return !emailError && !passwordError && !confirmPasswordError
   }
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!validateForm()) return
 
-    loginMutation.mutate({ email, password })
+    registerMutation.mutate({ email, password })
   }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>, field: FormField) => {
     const { value } = e.target
-    if (!removeWhitespace(value)) return
-
-    const setters = { email: setEmail, password: setPassword }
+    const setters = {
+      email: setEmail,
+      password: setPassword,
+      confirmPassword: setConfirmPassword,
+    }
     setters[field](value)
   }
 
-  return { email, password, errors, handleChange, handleSubmit }
+  return {
+    email,
+    password,
+    confirmPassword,
+    errors,
+    handleChange,
+    handleSubmit,
+  }
 }

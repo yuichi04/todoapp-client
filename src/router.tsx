@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { LogIn } from './components/organisms'
+import { LogIn, SignUp } from './components/organisms'
 import { TodoItem } from './components/molecules'
 import { useEffect } from 'react'
 import { axiosConfig } from './config/axios'
@@ -15,6 +15,7 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<LogIn />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/todo" element={<TodoItem />} />
       </Routes>
     </BrowserRouter>

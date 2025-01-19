@@ -5,7 +5,7 @@ import { CsrfToken } from '../types'
 export const getCsrfToken = async () => {
   try {
     const { data } = await axios.get<CsrfToken>('/csrf')
-    axios.defaults.headers.common['X-CSRF-TOKEN'] = data.csrf_token
+    axios.defaults.headers.common['X-CSRF-Token'] = data.csrf_token
   } catch (error) {
     console.error('Failed to fetch CSRF token:', error)
     throw error

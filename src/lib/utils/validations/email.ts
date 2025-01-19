@@ -1,13 +1,29 @@
 import { z } from 'zod'
 import { removeWhitespace } from '../format'
 
-const schema = z
-  .string()
-  .min(1, 'メールアドレスを入力してください')
-  .email('有効なメールアドレスを入力してください')
-  .transform(removeWhitespace)
+type ValidationMode = 'signup' | 'login'
 
-export const validateEmail = (email: string): string => {
+const errorMessages = {
+  signup: {
+    required: 'メールアドレスを入力してください',
+    format: '有効なメールアドレスを入力してください',
+  },
+  login: {
+    required: 'メールアドレスを入力してください',
+    format: '有効なメールアドレスを入力してください',
+  },
+} as const
+
+const createEmailSchema = (mode: ValidationMode) => {
+  return z
+    .string()
+    .min(1, errorMessages[mode].required)
+    .email(errorMessages[mode].format)
+    .transform(removeWhitespace)
+}
+
+export const validateEmail = (email: string, mode: ValidationMode): string => {
+  const schema = createEmailSchema(mode)
   const result = schema.safeParse(email)
   return result.success ? '' : result.error.errors[0].message
 }
