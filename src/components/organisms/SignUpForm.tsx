@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom'
 import { useSignUp } from '../../lib/hooks/useSignUp'
-import { TextField, ValidationMessage } from '../atoms'
+import { Button, Label, TextField, ValidationMessage } from '../atoms'
+import { Divider, SocialButton } from '../molecules'
 
-export const SignUp = () => {
+export const SignUpForm = () => {
   const {
     email,
     errors,
@@ -18,10 +18,9 @@ export const SignUp = () => {
     !isPasswordError && errors.confirmPassword.isError
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>アカウント作成画面</h2>
-      <div>
-        <label htmlFor="email">メールアドレス: </label>
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="space-y-2">
+        <Label htmlFor="email">メールアドレス:</Label>
         <TextField
           id="email"
           type="email"
@@ -31,8 +30,8 @@ export const SignUp = () => {
         />
         {isEmailError && <ValidationMessage message={errors.email.message} />}
       </div>
-      <div>
-        <label htmlFor="password">パスワード: </label>
+      <div className="space-y-2">
+        <Label htmlFor="password">パスワード:</Label>
         <TextField
           id="password"
           type="password"
@@ -44,11 +43,11 @@ export const SignUp = () => {
           <ValidationMessage message={errors.password.message} />
         )}
       </div>
-      <div>
-        <label htmlFor="confirmPassword">確認用パスワード: </label>
+      <div className="space-y-2">
+        <Label htmlFor="password">確認用パスワード:</Label>
         <TextField
           id="confirmPassword"
-          type="confirmPassword"
+          type="password"
           value={confirmPassword}
           onChange={(e) => handleChange(e, 'confirmPassword')}
           isError={isConfirmPasswordError}
@@ -57,10 +56,16 @@ export const SignUp = () => {
           <ValidationMessage message={errors.confirmPassword.message} />
         )}
       </div>
-      <div>
-        <button type="submit">アカウント作成</button>
+      <div className="pt-2">
+        <Button type="submit" fullWidth>
+          アカウントを作成する
+        </Button>
       </div>
-      <Link to="/login">ログインはこちら</Link>
+      <Divider text="または" />
+      <div className="space-y-3">
+        <SocialButton provider="github" fullWidth />
+        <SocialButton provider="google" fullWidth />
+      </div>
     </form>
   )
 }

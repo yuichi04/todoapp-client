@@ -1,9 +1,9 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { LogIn, SignUp } from './components/organisms'
-import { TodoItem } from './components/molecules'
 import { useEffect } from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { TodoItem } from './components/molecules'
 import { axiosConfig } from './config/axios'
 import { getCsrfToken } from './lib/api/csrf'
+import { LogIn, SignUp } from './components/pages'
 
 const Router = () => {
   useEffect(() => {

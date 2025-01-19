@@ -1,14 +1,13 @@
-import { Link } from 'react-router-dom'
 import { useLogIn } from '../../lib/hooks/useLogIn'
-import { TextField, ValidationMessage } from '../atoms'
+import { Button, Label, TextField, ValidationMessage } from '../atoms'
+import { SocialButton, Divider } from '../molecules'
 
-export const LogIn = () => {
+export const LogInForm = () => {
   const { email, errors, password, handleChange, handleSubmit } = useLogIn()
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>ログイン画面</h2>
-      <div>
-        <label htmlFor="email">メールアドレス: </label>
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="space-y-2">
+        <Label htmlFor="email">メールアドレス:</Label>
         <TextField
           id="email"
           type="email"
@@ -20,8 +19,8 @@ export const LogIn = () => {
           <ValidationMessage message={errors.email.message} />
         )}
       </div>
-      <div>
-        <label htmlFor="password">パスワード: </label>
+      <div className="space-y-2">
+        <Label htmlFor="password">パスワード:</Label>
         <TextField
           id="password"
           type="password"
@@ -34,9 +33,15 @@ export const LogIn = () => {
         )}
       </div>
       <div>
-        <button type="submit">ログイン</button>
+        <Button type="submit" fullWidth>
+          ログインする
+        </Button>
       </div>
-      <Link to="/signup">既にアカウントをお持ちの方はこちら</Link>
+      <Divider text="または" />
+      <div className="space-y-3">
+        <SocialButton provider="github" fullWidth />
+        <SocialButton provider="google" fullWidth />
+      </div>
     </form>
   )
 }

@@ -1,2 +1,3 @@
-export { LogIn } from './LogIn'
-export { SignUp } from './SignUp'
+export { LogInForm } from './LogInForm'
+export { SignUpForm } from './SignUpForm'
+export { Header } from './Header'
