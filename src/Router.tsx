@@ -5,7 +5,7 @@ import { axiosConfig } from './config/axios'
 import { getCsrfToken } from './lib/api/csrf'
 import { LogIn, SignUp } from './components/pages'
 
-const Router = () => {
+export const Router = () => {
   useEffect(() => {
     axiosConfig()
     getCsrfToken()
@@ -21,5 +21,3 @@ const Router = () => {
     </BrowserRouter>
   )
 }
-
-export default Router

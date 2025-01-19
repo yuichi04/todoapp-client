@@ -23,7 +23,7 @@ export const FormTemplate = ({
       <Header />
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-md mx-auto border rounded-md p-8 bg-white shadow-sm">
-          <h2 className="text-xl font-bold mb-4">{heading}</h2>
+          <h2 className="text-xl text-gray-800 font-bold mb-4">{heading}</h2>
           <div className="mb-6">{content}</div>
           <div className="text-right">
             <Link

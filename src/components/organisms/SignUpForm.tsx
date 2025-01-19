@@ -44,7 +44,7 @@ export const SignUpForm = () => {
         )}
       </div>
       <div className="space-y-2">
-        <Label htmlFor="password">確認用パスワード:</Label>
+        <Label htmlFor="confirmPassword">確認用パスワード:</Label>
         <TextField
           id="confirmPassword"
           type="password"
