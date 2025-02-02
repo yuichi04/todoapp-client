@@ -1,9 +1,19 @@
 import { useEffect } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { TodoItem } from './components/molecules'
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
 import { axiosConfig } from './config/axios'
 import { getCsrfToken } from './lib/api/csrf'
-import { LogIn, SignUp } from './components/pages'
+import { LogInPage, SignUpPage, TodoListPage } from './components/pages'
+
+const Home = () => (
+  <div className="p-4 space-x-2">
+    <Link to="login" className="border p-2 bg-gray-50">
+      LogIn
+    </Link>
+    <Link to="signup" className="border p-2 bg-gray-50">
+      SignUp
+    </Link>
+  </div>
+)
 
 export const Router = () => {
   useEffect(() => {
@@ -14,9 +24,10 @@ export const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<LogIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/todo" element={<TodoItem />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<LogInPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/todo" element={<TodoListPage />} />
       </Routes>
     </BrowserRouter>
   )

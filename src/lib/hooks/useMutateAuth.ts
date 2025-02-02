@@ -20,6 +20,7 @@ export const useMutateAuth = () => {
 
   const registerMutation = useMutation({
     mutationFn: async (user: Credential) => await axios.post('/signup', user),
+    onSuccess: () => navigate('/todo'),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onError: (err: any) =>
       switchErrorHandling(err.response.data.message || err.response.data),
